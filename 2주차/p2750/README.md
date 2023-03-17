@@ -1,3 +1,3 @@
 # 2주차 문제
-### 백준 1874
+### 버블 정렬 - 백준 2750
 https://www.acmicpc.net/problem/2750
