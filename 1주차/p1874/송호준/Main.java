@@ -3,31 +3,55 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Queue<Integer> q = new LinkedList<>();
+        StringBuilder sb = new StringBuilder();
+        Stack<Integer> stack = new Stack<>();
         int N = Integer.parseInt(br.readLine());
-        if (N == 1) {
-            System.out.println(1);
-            return;
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++) {
+            arr[i] = i + 1;
         }
-        int answer;
-        for (int i = 1; i <= N; i++) {
-            q.add(i);
-        }
-        while (true) {
-            q.poll();
-            if (q.size() == 1) {
-                answer = q.poll();
-                break;
+        int max = 0;
+        int ptr = 1;
+        stack.add(0);
+        for (int i = 0; i < N; i++) {
+            int number = Integer.parseInt(br.readLine());
+            max = Math.max(number, max);
+            int now = stack.peek();
+            if (number > now) {
+                if (max > number) {
+                    sb = new StringBuilder();
+                    sb.append("NO");
+                    break;
+                }
+                while (stack.peek() != number) {
+                    stack.add(ptr);
+                    ptr++;
+                    sb.append("+").append("\n");
+                }
+            } else if (number < now) {
+                while (stack.peek() != number) {
+                    if (stack.isEmpty()) {
+                        sb = new StringBuilder();
+                        sb.append("NO");
+                        break;
+                    }
+                    stack.pop();
+                    sb.append("-").append("\n");
+                }
+
             }
-            int tmp = q.poll();
-            q.add(tmp);
+            if (number == stack.peek()) {
+                stack.pop();
+                sb.append("-").append("\n");
+            }
         }
-        System.out.println(answer);
+        System.out.println(sb);
     }
 }
