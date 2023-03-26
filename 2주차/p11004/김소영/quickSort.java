@@ -12,35 +12,46 @@ public class Main {
             array[i] = sc.nextInt();
         }
         System.out.println("입력된 배열 : "+Arrays.toString(array));
-        array=quick(low, high, array);
+        quick(low, high, array);
         System.out.println("최종 정렬 결과 : "+Arrays.toString(array));
+        System.out.println(rank+ "번째로 큰 수 : "+array[rank-1]);
 
     }
 
-    public static int[] quick(int low, int high, int[] arr){
-        if(low>=high) return arr;
-        int pivot = arr[0];
-        int i=low+1, j=high;
+    public static int partition(int low, int high, int[] arr){
 
-        while(i <= j){
+        int pivot = (low+high)/2;
+
+        while(low < high){
             //피벗보다 작은 값을 찾을때까지 증가
-            while(i<high && arr[i] < arr[pivot])
-                i++;
+            while(low<=high && arr[low] <= arr[pivot])
+                low++;
 
             //피벗보다 큰 값을 찾을때까지 감소
-            while(j>low && arr[j]>arr[pivot] )
-                j--;
+            while(low<=high && arr[high]>arr[pivot] )
+                high--;
 
-            if(i>j){
-                int temp = arr[j];
-                arr[j] = arr[pivot];
-                arr[pivot] = temp;
-            }else {
-                int temp = arr[j];
-                arr[j] = arr[i];
-                arr[i] = temp;
+            if(high>=low){
+                int temp = arr[low];
+                arr[low] = arr[high];
+                arr[high] = temp;
+                if(high == pivot) return low;
             }
         }
-        return arr;
+
+        if(high != pivot){
+            int temp = arr[high];
+            arr[high] = arr[pivot];
+            arr[pivot] = temp;
+        }
+        return high;
+    }
+
+    public static void quick(int low, int high, int[] arr){
+        if(low<high){
+            int pivot = partition(low, high, arr);
+            quick(low, pivot-1, arr);
+            quick(pivot+1, high, arr);
+        }
     }
 }
