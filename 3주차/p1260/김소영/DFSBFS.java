@@ -66,12 +66,6 @@ class Graph {
         }
     }
 
-    void dfsR(Node r){
-        if(r==null) return;
-        r.marked = true;
-        visit(r);
-        
-    }
     void visit(Node n){
         System.out.println(n.data+" ");
     }
