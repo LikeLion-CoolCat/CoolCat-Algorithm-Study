@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
- 
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -12,7 +12,8 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         boolean[] isNotPrime = new boolean[N + 1];
         StringBuilder sb = new StringBuilder();
-
+        
+        isNotPrime[1] = true;
         for (int i = 2; i <= N; i++) {
             if (!isNotPrime[i]) {
                 for (int j = i + i; j <= N; j += i) {
