@@ -15,7 +15,6 @@ public class Main {
     }
 
     private static final List<List<Edge>> graph = new ArrayList<>();
-    private static boolean[] visited;
     private static int[] dist;
 
     public static void main(String[] args) throws IOException {
@@ -38,7 +37,6 @@ public class Main {
             graph.get(v1).add(new Edge(v2, w));
         }
 
-        visited = new boolean[v];
         dist = new int[v];
         for (int i = 0; i < v; i++) {
             dist[i] = Integer.MAX_VALUE;
@@ -63,13 +61,8 @@ public class Main {
 
         while (!pq.isEmpty()) {
             Edge now = pq.poll();
-            if (visited[now.v]) {
-                continue;
-            }
-            visited[now.v] = true
-            ;
             for (Edge next : graph.get(now.v)) {
-                if (!visited[next.v] && dist[next.v] > dist[now.v] + next.cost) {
+                if (dist[next.v] > dist[now.v] + next.cost) {
                     dist[next.v] = dist[now.v] + next.cost;
                     pq.add(new Edge(next.v, dist[next.v]));
                 }
