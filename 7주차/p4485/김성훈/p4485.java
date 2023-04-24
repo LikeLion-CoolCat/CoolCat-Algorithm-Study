@@ -9,7 +9,7 @@ public class p4485 {
     //동굴의 크기
     static int N;
 
-    //(수학의 좌표가 아닌 배열의 축으로 생각해야함)
+    //좌 하 우 (수학의 좌표가 아닌 배열의 축으로 생각해야함)
     static int[] dx = { -1, 0, 1, 0 };
     static int[] dy = { 0, 1, 0, -1 };
 
@@ -85,16 +85,16 @@ public class p4485 {
             //방문 처리
             visited[x][y] = true;
 
-            //4인 이유 -> 동 서 남 북
+            //4인 이유 -> 네 방향
             for(int i=0; i<4; i++)
             {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
 
-                //현재 위치에서 동, 서, 남, 북을 둘러봤을 때, 인덱스를 벗어나지 않는가?
+                //현재 위치에서 네 방향을 둘러봤을 때, 인덱스를 벗어나지 않는가?
                 if(nx >= 0 && nx < N && ny >= 0 && ny < N)
                 {
-                    //(동, 서, 남, 북) 에 방문하지 않은 곳이 있다면
+                    //네 방향 중에 방문하지 않은 곳이 있다면
                     if(!visited[nx][ny])
                     {
                         int current_cost = cave[nx][ny];
