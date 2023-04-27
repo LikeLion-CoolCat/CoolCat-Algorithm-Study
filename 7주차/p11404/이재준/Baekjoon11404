@@ -1,0 +1,58 @@
+public class Main {
+    
+    public static int count;
+    public static int[][] dist;
+    
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        
+        count = Integer.parseInt(br.readLine());
+        
+        int busCount = Integer.parseInt(br.readLine());
+        
+        dist = new int[count + 1][count + 1];
+        
+        for(int i=1; i <= count; i++) {
+            for(int j=1; j <= count; j++) {
+                if(i == j) continue;
+                dist[i][j] = Integer.MAX_VALUE;
+            }
+        }
+        
+        while(busCount > 0) {
+            st = new StringTokenizer(br.readLine());
+            
+            int s = Integer.parseInt(st.nextToken());
+            int e = Integer.parseInt(st.nextToken());
+            int time = Integer.parseInt(st.nextToken());
+            
+            dist[s][e] = Math.min(dist[s][e], time); 
+            busCount--;
+        }
+ 
+        floy();
+        
+        for(int i=1; i <= cityCount; i++) {
+            for(int j=1; j <= cityCount; j++) {
+                if(dist[i][j] >= Integer.MAX_VALUE) 
+                  System.out.print("0 ");
+                else 
+                  System.out.print(dist[i][j] + " ");
+            }
+            System.out.println()
+        }
+    }
+    
+    public static void floy() {
+        for(int k = 1; k <= cityCount; k++) {
+            for(int i=1; i <= cityCount; i++) {
+                for(int j=1; j <= cityCount; j++) {
+                    dist[i][j] = Math.min(dist[i][k] + dist[k][j], dist[i][j]);
+                }
+            }
+        }
+    }
+    
+  
+}
