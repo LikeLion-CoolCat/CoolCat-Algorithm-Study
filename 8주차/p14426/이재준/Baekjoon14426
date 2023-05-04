@@ -1,0 +1,19 @@
+public class Main {
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int n=Integer.parseInt(st.nextToken()), m=Integer.parseInt(st.nextToken()), cnt=0;
+		String [] arr = new String [n];
+		for(int i=0;i<n;i++)
+			arr[i]=br.readLine();
+		for(int i=0;i<m;i++) {
+			String str = br.readLine();
+			for(int j=0;j<n;j++)
+				if(arr[j].startsWith(str)) {
+					cnt++;
+					break;
+				}
+		}
+		System.out.println(cnt);
+	}
+}
